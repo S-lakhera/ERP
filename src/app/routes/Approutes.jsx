@@ -9,6 +9,7 @@ import PublicRoutes from './PublicRoutes'
 import ProtectedRoutes from './ProtectedRoutes'
 import EmployeePage from '../../features/employe/pages/EmployeePage'
 import RegistrationPage from '../../features/registration/pages/RegistrationPage'
+import { EmployeeContextProvider } from '../../context/EmployeeContext'
 
 const Approutes = () => {
     let router = createBrowserRouter([
@@ -38,7 +39,9 @@ const Approutes = () => {
             children: [
                 {
                     path: "",
-                    element: <DashboardLayout />,
+                    element: <EmployeeContextProvider>
+                        <DashboardLayout />
+                    </EmployeeContextProvider>,
                     children: [
                         {
                             path: "",

@@ -22,10 +22,8 @@ export let AuthContextProvider = ({ children }) => {
     }
 
     const loginAdmin = (data) => {
-        console.log(data);
         
         const admin = registeredAdmins.find((e) => e.email == data.email && e.password === data.password)
-        console.log(admin);
         
         if(!admin) {
             alert("Account Not found, Check credentials or register.");
@@ -33,6 +31,11 @@ export let AuthContextProvider = ({ children }) => {
         }
         setLoggedInAdmin(admin)
         localStorage.setItem("admin", JSON.stringify(admin));
+    }
+
+    let logoutAdmin = () => {
+        storage.remove("admin")
+        setLoggedInAdmin(null)
     }
 
     useEffect(() => {
@@ -46,7 +49,8 @@ export let AuthContextProvider = ({ children }) => {
             loggedInAdmin,
             loginAdmin,
             registerAdmin,
-            registeredAdmins
+            registeredAdmins,
+            logoutAdmin
         }}
     >
         {children}

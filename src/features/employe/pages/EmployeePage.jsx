@@ -2,15 +2,11 @@ import React from 'react';
 import EmployeeTable from '../components/EmployeeTable'; // path check kar lena
 import { UserPlus, Filter, Search } from 'lucide-react';
 import { NavLink } from 'react-router';
+import { useEmployeeContext } from '../../../shared/hooks/useContextData';
 
 const EmployeePage = () => {
   // Dummy Data
-  const employees = [
-    { id: 1, name: "Sarah Jenkins", email: "sarah.j@nexus.com", role: "Senior UX Designer", department: "Product & Design", status: "Active", joinedDate: "Oct 24, 2023", img: "https://i.pravatar.cc/150?u=sarah" },
-    { id: 2, name: "Marcus Thorne", email: "m.thorne@nexus.com", role: "Full Stack Developer", department: "Engineering", status: "On Leave", joinedDate: "Jan 12, 2024", img: "https://i.pravatar.cc/150?u=marcus" },
-    { id: 3, name: "Amara Okoro", email: "amara.o@nexus.com", role: "Operations Lead", department: "Operations", status: "Active", joinedDate: "Mar 05, 2023", img: "https://i.pravatar.cc/150?u=amara" },
-    { id: 4, name: "David Miller", email: "d.miller@nexus.com", role: "Marketing Manager", department: "Marketing", status: "Terminated", joinedDate: "Jun 18, 2023", img: "https://i.pravatar.cc/150?u=david" },
-  ];
+  const {employees} = useEmployeeContext();
 
   return (
     <div className="p-8 bg-[var(--color-bg-page)] min-h-full">

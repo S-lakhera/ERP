@@ -1,8 +1,12 @@
 import React from 'react';
 import { LayoutDashboard, Users, CalendarCheck, Banknote, Settings, HelpCircle, Plus } from 'lucide-react';
 import { NavLink } from 'react-router';
+import { useAuthContext } from '../hooks/useContextData';
 
 const Sidebar = () => {
+
+  const {logoutAdmin} = useAuthContext()
+
   const menuItems = [
     { icon: <LayoutDashboard size={20} />, label: 'Dashboard', path: '/dashboard' },
     { icon: <Users size={20} />, label: 'Employee', path: '/dashboard/employee' },
@@ -50,10 +54,11 @@ const Sidebar = () => {
 
       {/* Bottom Section */}
       <div className="space-y-4">
-        <NavLink to="/dashboard/registration"
-         className="w-full bg-[#0F172A] text-white py-3 rounded-lg flex items-center justify-center gap-2 text-sm font-semibold hover:bg-slate-800 transition-all shadow-md uppercase tracking-wider">
-          Quick Add
-        </NavLink>
+        <button
+          onClick={() => logoutAdmin()}
+          className="w-full bg-[#0F172A] text-white py-3 rounded-lg flex items-center justify-center gap-2 text-sm font-semibold hover:bg-slate-800 transition-all shadow-md uppercase tracking-wider">
+          Logout
+        </button>
         <div className="flex items-center gap-2 px-4 py-2 text-gray-500 cursor-pointer hover:text-gray-800">
           <HelpCircle size={18} />
           <span className="text-sm">Support</span>

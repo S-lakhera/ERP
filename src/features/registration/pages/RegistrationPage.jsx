@@ -2,31 +2,28 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { User, Mail, Phone, MapPin, Calendar, Save, ShieldCheck, IdCard } from 'lucide-react';
 import Input from "../../../shared/components/Input";
+import { useEmployee } from '../hooks/useEmployee';
 
 
 
 const RegistrationPage = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
-
-  const onSubmit = (data) => {
-    console.log("Form Data:", data);
-  };
+  const { registerEmployee, handleSubmit, errors, register, } = useEmployee()
 
   return (
-    <div className="p-6 bg-[var(--color-bg-page)] min-h-full">
+    <div className="p-6 bg-bg-page min-h-full">
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-[var(--color-text-main)]">Employee Registration</h1>
-        <p className="text-sm text-[var(--color-text-dim)]">Create a new profile in Nexus ERP.</p>
+        <p className="text-sm text-text-dim">Create a new profile in Nexus ERP.</p>
       </div>
 
-      <form 
-        onSubmit={handleSubmit(onSubmit)} 
-        className="max-w-5xl bg-[var(--color-surface)] rounded-2xl border border-[var(--color-border-light)] shadow-[var(--shadow-erp-card)] overflow-hidden"
+      <form
+        onSubmit={handleSubmit(registerEmployee)}
+        className="max-w-5xl bg-[var(--color-surface)] rounded-2xl border border-[var(--color-border-light)] shadow-(--shadow-erp-card) overflow-hidden"
       >
         <div className="p-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-          
+
           {/* Reusing your Input Component */}
-          <Input 
+          <Input
             label="Full Name"
             name="fullName"
             register={register}
@@ -36,12 +33,12 @@ const RegistrationPage = () => {
             placeholder="John Doe"
           />
 
-          <Input 
+          <Input
             label="Email Address"
             name="email"
             register={register}
             error={errors.email}
-            rules={{ 
+            rules={{
               required: "Email is required",
               pattern: { value: /^\S+@\S+$/i, message: "Invalid email" }
             }}
@@ -50,7 +47,7 @@ const RegistrationPage = () => {
             placeholder="john@nexus.com"
           />
 
-          <Input 
+          <Input
             label="Phone Number"
             name="phone"
             register={register}
@@ -60,7 +57,7 @@ const RegistrationPage = () => {
             placeholder="+91 00000 00000"
           />
 
-          <Input 
+          <Input
             label="City"
             name="city"
             register={register}
@@ -69,7 +66,7 @@ const RegistrationPage = () => {
             placeholder="Kanpur"
           />
 
-          <Input 
+          <Input
             label="Role"
             name="role"
             placeholder="Senior developer"
@@ -80,19 +77,35 @@ const RegistrationPage = () => {
           />
 
           <div className="space-y-2">
-                  <label className="text-xs font-bold text-[var(--color-text-muted)] uppercase tracking-wider">Department</label>
-                  <div className="relative">
-                    <select className="w-full bg-[var(--color-bg-input)] border-none rounded-xl py-3 px-4 text-sm focus:ring-2 focus:ring-[var(--color-ring-input)] outline-none appearance-none">
-                      <option>Engineering</option>
-                      <option>Product & Design</option>
-                      <option>Operations</option>
-                      <option>Marketing</option>
-                    </select>
-                    <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none text-gray-400">
-                      <ShieldCheck size={16} />
-                    </div>
-                  </div>
-                </div>
+            <label className="text-xs font-bold text-[var(--color-text-muted)] uppercase tracking-wider">
+              Department
+            </label>
+            <div className="relative">
+              <select
+                // Registering the select field
+                {...register("department", { required: "Department is required" })}
+                className="w-full bg-(--color-bg-input) border-none rounded-xl py-3 px-4 text-sm focus:ring-2 focus:ring-ring-input outline-none appearance-none cursor-pointer"
+              >
+                <option value="">Select Department</option> {/* Placeholder option */}
+                <option value="Engineering">Engineering</option>
+                <option value="Product & Design">Product & Design</option>
+                <option value="Operations">Operations</option>
+                <option value="Marketing">Marketing</option>
+              </select>
+
+              {/* Arrow Icon */}
+              <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none text-gray-400">
+                <ShieldCheck size={16} />
+              </div>
+            </div>
+
+            {/* Error Message display */}
+            {errors.department && (
+              <div className="text-xs text-red-400 font-semibold">
+                {errors.department.message}
+              </div>
+            )}
+          </div>
         </div>
 
         <div className="bg-gray-50/50 p-6 flex justify-end gap-4 border-t border-[var(--color-border-light)]">
