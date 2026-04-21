@@ -7,6 +7,8 @@ import DashboardLayout from '../layouts/DashboardLayout'
 import Home from '../../features/dashboard/pages/Home'
 import PublicRoutes from './PublicRoutes'
 import ProtectedRoutes from './ProtectedRoutes'
+import EmployeePage from '../../features/employe/pages/EmployeePage'
+import RegistrationPage from '../../features/registration/pages/RegistrationPage'
 
 const Approutes = () => {
     let router = createBrowserRouter([
@@ -41,7 +43,15 @@ const Approutes = () => {
                         {
                             path: "",
                             element: <Home />
-                        }
+                        },
+                        {
+                            path: "employee",
+                            element: <EmployeePage />
+                        },
+                        {
+                            path: "registration",
+                            element: <RegistrationPage />
+                        },
                     ]
                 }
             ]
