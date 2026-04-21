@@ -1,11 +1,26 @@
 import React, { useState } from 'react';
-import { Edit2, Trash2 } from 'lucide-react';
+import { Edit2, Trash2, Users } from 'lucide-react'; // Users icon add kiya
 import { useEmploye } from '../hooks/useEmploye';
 import EditEmployeeModal from './EditEmployeeModal';
 
 const EmployeeTable = ({ employees }) => {
   const { deleteEmployee } = useEmploye();
   const [editingEmployee, setEditingEmployee] = useState(null);
+
+  // 1. Corner Case: If employees array is empty or null
+  if (!employees || employees.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center py-20 px-4">
+        <div className="bg-gray-50 p-6 rounded-full mb-4">
+          <Users size={48} className="text-[var(--color-text-dim)]" />
+        </div>
+        <h3 className="text-lg font-bold text-[var(--color-text-main)]">No employees found</h3>
+        <p className="text-sm text-[var(--color-text-dim)] text-center max-w-xs mt-1">
+          It looks like you haven't added any employees yet. Start by clicking the "Add New" button.
+        </p>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -20,20 +35,16 @@ const EmployeeTable = ({ employees }) => {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-50">
-            {employees?.map((emp) => {
-              // Extracting first letter from fullName
+            {employees.map((emp) => {
               const firstLetter = emp.fullName ? emp.fullName.charAt(0).toUpperCase() : '?';
 
               return (
                 <tr key={emp.id} className="hover:bg-gray-50/50 transition-colors group">
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-3">
-                      
-                      {/* Dark Circular Avatar with Light Letter */}
                       <div className="w-10 h-10 rounded-full bg-[var(--color-primary)] flex items-center justify-center text-[var(--color-bg-page)] font-bold text-sm shadow-md uppercase shrink-0">
                         {firstLetter}
                       </div>
-                      
                       <div className="min-w-0">
                         <div className="text-sm font-bold text-[var(--color-text-main)] truncate">{emp.fullName}</div>
                         <div className="text-[11px] text-[var(--color-text-dim)] font-medium truncate">{emp.email}</div>
@@ -47,7 +58,6 @@ const EmployeeTable = ({ employees }) => {
                   </td>
                   
                   <td className="px-6 py-4 text-sm font-medium text-[var(--color-text-muted)]">
-                    {/* Timestamp formatting remains same */}
                     {typeof emp.joiningDate === 'number' 
                       ? new Date(emp.joiningDate).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }) 
                       : emp.joiningDate}
@@ -76,7 +86,6 @@ const EmployeeTable = ({ employees }) => {
         </table>
       </div>
 
-      {/* Edit Modal */}
       {editingEmployee && (
         <EditEmployeeModal
           employee={editingEmployee}
@@ -87,4 +96,4 @@ const EmployeeTable = ({ employees }) => {
   );
 };
 
-export default EmployeeTable;
+export default EmployeeTable;

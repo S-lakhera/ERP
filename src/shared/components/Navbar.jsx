@@ -17,12 +17,7 @@ const Navbar = () => {
         />
       </div>
 
-      {/* Center: Navigation Tabs */}
-      <div className="hidden md:flex items-center gap-8">
-        <a href="#" className="text-sm font-semibold text-gray-900 border-b-2 border-slate-900 pb-7 mt-7">Overview</a>
-        <a href="#" className="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">Reports</a>
-        <a href="#" className="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">Documents</a>
-      </div>
+     
 
       {/* Right: Actions & Profile */}
       <div className="flex items-center gap-6">
