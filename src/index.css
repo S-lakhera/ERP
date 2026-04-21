@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+@theme {
+  /* --- Backgrounds & Surfaces --- */
+  --color-bg-page: #f9fafb;
+  --color-surface: #ffffff;
+  --color-bg-input: #f1f5f9;
+  /* slate-100 */
+
+  /* --- Brand & Accents --- */
+  --color-primary: #0f172a;
+  /* slate-950 */
+  --color-primary-hover: #1e293b;
+  /* slate-800 */
+  --color-accent: #34d399;
+  /* emerald-400 */
+
+  /* --- Typography --- */
+  --color-text-main: #0f172a;
+  /* slate-900 */
+  --color-text-muted: #64748b;
+  /* slate-500 */
+  --color-text-dim: #94a3b8;
+  /* slate-400 */
+
+  /* --- Borders & Rings --- */
+  --color-border-light: #f1f5f9;
+  /* slate-100 */
+  --color-ring-input: #e2e8f0;
+  /* slate-200 */
+
+  /* --- Custom Shadows & Gradients --- */
+  --shadow-erp-card: 0 10px 30px rgba(15, 23, 42, 0.08);
+  --shadow-erp-btn: 0 4px 6px -1px rgba(15, 23, 42, 0.1), 0 2px 4px -1px rgba(15, 23, 42, 0.06);
+
+  --bg-gradient-login: radial-gradient(circle at bottom right, rgba(198, 247, 241, 0.45), transparent 35%),
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.95), #f9fafb);
+}
+
+html,
+body {
+  background-color: var(--color-bg);
+  color: var(--color-main);
+}
